@@ -9,14 +9,12 @@ import grass.script.array as garray
 
 def main():
     region = gscript.region()
-    nsres = region["nsres"]
-    ewres = region["ewres"]
-    delta = 1
+    res = (region["ewres"], region["nsres"])
+    delta = (1, 1)
     size = (250, 250)
-    if not size[0] - delta < ewres < size[0] + 1:
-        raise ValueError(f"EW resolution not {size[0]}+-{delta}")
-    if not size[1] - delta < nsres < size[1] + 1:
-        raise ValueError(f"NS resolution not {size[1]}+-{delta}")
+    for i in range(len(res)):
+        if not size[i] - delta[i] < ewres < size[i] + delta[i]:
+            raise ValueError(f"Resolution mismatch, should be {size[0]}+-{delta}")
     # Create one vector feature to improve speed for calculations
     print("Preparing data...", flush=True)
     gscript.run_command(
