@@ -14,9 +14,9 @@ def main():
     delta = 1
     size = (250, 250)
     if not size[0] - delta < ewres < size[0] + 1:
-        raise ValueError("EW resolution not ~250")
+        raise ValueError(f"EW resolution not {size[0]}+-{delta}")
     if not size[1] - delta < nsres < size[1] + 1:
-        raise ValueError("NS resolution not ~250")
+        raise ValueError(f"NS resolution not {size[1]}+-{delta}")
     # Create one vector feature to improve speed for calculations
     print("Preparing data...", flush=True)
     gscript.run_command(
